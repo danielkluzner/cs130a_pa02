@@ -22,8 +22,10 @@ int main() {
     FeatureGraph graph = FeatureGraph(4, d, nodes, edges);
     GraphAnalyzer analyzer = GraphAnalyzer(graph);
 
+    graph.print();
 
-    cout << analyzer.diameter() << "\n";
+
+    /*cout << analyzer.diameter() << "\n";
 
     cout << analyzer.openClosedTriangleRatio() << "\n";
 
@@ -47,6 +49,6 @@ int main() {
 
     cout << analyzer.topNonNeighbor(2, weights) << "\n";
 
-    cout << analyzer.jacardIndexOfTopKNeighborhoods(1, 2, 2, weights);
+    cout << analyzer.jacardIndexOfTopKNeighborhoods(1, 2, 2, weights);*/
     return 0;
 }

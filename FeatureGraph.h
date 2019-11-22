@@ -14,7 +14,15 @@ using namespace std;
 
 class FeatureGraph {
 
-public:
+ private:
+  map<int, Node> nodes;
+  map<int, vector<int>> neighbors;
+  vector<Edge> edges;
+  int skillsize;
+  int numnodes;
+  int numedges;
+
+ public:
     // TODO add necessary private fields
 
 
@@ -34,6 +42,11 @@ public:
     // May assume nodes in edge are already present
     void insert(Edge edge);
 
+    void print();
+
+    vector<int> getNeighbors(int nodeID);
+
+    vector<float> getFeatures(int nodeID);
 
 };  
 

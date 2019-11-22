@@ -1,6 +1,7 @@
 #include "GraphHelper.h"
 #include "FeatureGraph.h"
 #include "GraphAnalyzer.h"
+#include <algorithm>
 
 using namespace std;
 
@@ -33,8 +34,25 @@ string GraphAnalyzer::topKOpenTriangles(int k) {
 
 
 vector<int> GraphAnalyzer::topKNeighbors(int nodeID, int k,  vector<float> w) {
-    //TODO
-    return vector<int> {3};
+  vector<int> dots;
+  vector<int> result;
+  vector<int> neighborIDs = G.getNeighbors(nodeID);
+  vector<float> feats;
+  for(int i = 0; i < neighborIDs.size(); i++){
+    feats.resize(0);
+    feats = G.getFeatures(nodeID);
+    for(int j = 0; j < w.size(); j++){
+      dots.push_back(feats[j] * w[j]);
+    }
+  }
+  make_heap(dots.begin(), dots.end());
+  for(int i = 0; i < k; i++){
+    result.push_back(dots.front());
+    pop_heap(dots.begin(), dots.end());
+    make_heap(dots.begin(), dots.end());
+  }
+
+  return result;
 };
 
 
