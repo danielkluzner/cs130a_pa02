@@ -59,7 +59,7 @@ vector<int> GraphAnalyzer::topKNeighbors(int nodeID, int k,  vector<float> w) {
   for(int i = 0; i < dots.size(); i++){
     result[i] = dots[i].second;
   }
-  for(int j = 0; j < k;j++)
+  while(result.size()!=k)
   {
       result.push_back(0);
   }
