@@ -20,9 +20,9 @@ int main() {
  
 
     FeatureGraph graph = FeatureGraph(4, d, nodes, edges);
-    GraphAnalyzer analyzer = GraphAnalyzer(graph);
+ 
+    //GraphAnalyzer analyzer = GraphAnalyzer(graph);
 
-    graph.print();
 
 
     /*cout << analyzer.diameter() << "\n";
