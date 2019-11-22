@@ -3,9 +3,15 @@
 #include "GraphAnalyzer.h"
 #include <algorithm>
 #include <utility>
+#include <algorithm>
 
 using namespace std;
 
+bool sortBackwards(const pair<float,int> &one,  
+               const pair<float,int> &two) 
+{ 
+       return (one.first > two.first); 
+} 
 
 void GraphAnalyzer::insert(Node n) {
     G.insert(n);
@@ -36,7 +42,7 @@ string GraphAnalyzer::topKOpenTriangles(int k) {
 
 vector<int> GraphAnalyzer::topKNeighbors(int nodeID, int k,  vector<float> w) {
   vector<pair<float,int>> dots;
-  vector<int> result;
+  vector<int> result(k,0);
   vector<int> neighborIDs = G.getNeighbors(nodeID);
   vector<float> feats;
   float sum(0);
@@ -46,14 +52,16 @@ vector<int> GraphAnalyzer::topKNeighbors(int nodeID, int k,  vector<float> w) {
     for(int j = 0; j < w.size(); j++){
       sum += (feats[j] * w[j]);
     }
-    dots.push_back(sum);
+    dots.push_back(pair<float,int>(sum,neighborIDs[i]));
     sum = 0;
   }
-  make_heap(dots.begin(), dots.end());
-  for(int i = 0; i < k; i++){
-    result.push_back(dots.front());
-    pop_heap(dots.begin(), dots.end());
-    make_heap(dots.begin(), dots.end());
+  sort(dots.begin(), dots.end(), sortBackwards);
+  for(int i = 0; i < dots.size(); i++){
+    result[i] = dots[i].second;
+  }
+  for(int j = 0; j < k;j++)
+  {
+      result.push_back(0);
   }
 
   return result;
