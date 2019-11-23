@@ -13,7 +13,7 @@ using namespace std;
 
 FeatureGraph::FeatureGraph(int N, int d, vector<Node> nodes, vector<Edge> edges) {
   this->edges = edges;
-  for(int i = 0; i < nodes.size(); i++){
+  for(int i = 0; i < N; i++){
     (this->nodes).insert(pair<int, Node>((nodes[i]).id, Node(nodes[i].id, nodes[i].features)));
   }
   skillsize = d;
@@ -31,27 +31,24 @@ FeatureGraph::FeatureGraph(int N, int d, vector<Node> nodes, vector<Edge> edges)
 };
 
 void FeatureGraph::insert(Node node){
-    //TODO
+  //TODO
 };
     
 void FeatureGraph::insert(Edge edge){
-    //TODO
+  //TODO
 };
 
 void FeatureGraph::print(){
   cout << "Edges\n-------\n";
   for(int i = 0; i < edges.size(); i++){
-    cout << "(" << (edges[i]).IdA << ", " << (edges[i]).IdB << ")";
+    cout << "(" << (edges[i]).IdA << ", " << (edges[i]).IdB << ") ";
   }
+  cout << endl << endl;
   map<int, vector<int>>::iterator itr;
   cout << "Nodes\n-------\n";
-  /*for(itr = nodes.begin(); itr != nodes.end(); itr++){
-    cout << itr->first << "\t";
-    cout << (itr->second).id << endl;
-    }*/
-  cout << endl;
+  cout << "nodeID\t\tneighbors\n";
   for(itr = neighbors.begin(); itr != neighbors.end(); itr++){
-    cout << itr->first << "\t";
+    cout << itr->first << "\t\t";
     for(int i = 0; i < (itr->second).size(); i++){
       cout << (itr->second)[i] << " ";
     }
@@ -68,5 +65,4 @@ vector<float> FeatureGraph::getFeatures(int nodeID){
   Node n = nodes.lower_bound(nodeID)->second;
   return n.features;
 };
-
 

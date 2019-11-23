@@ -8,35 +8,35 @@
 using namespace std;
 
 bool sortBackwards(const pair<float,int> &one,  
-               const pair<float,int> &two) 
+		   const pair<float,int> &two) 
 { 
-       return (one.first > two.first); 
+  return (one.first > two.first); 
 } 
 
 void GraphAnalyzer::insert(Node n) {
-    G.insert(n);
-    // TODO Adjust calculations for ratio of open triangles and topKtriangles
+  G.insert(n);
+  // TODO Adjust calculations for ratio of open triangles and topKtriangles
 };
 
 void GraphAnalyzer::insert(Edge e) {
-    G.insert(e);
-    // TODO Adjust calculations for ratio of open triangles and topKtriangles
+  G.insert(e);
+  // TODO Adjust calculations for ratio of open triangles and topKtriangles
 };
 
 int GraphAnalyzer::diameter() {
-    //TODO
-    return 2;
+  //TODO
+  return 2;
 };
 
 
 float GraphAnalyzer::openClosedTriangleRatio() {
-    //TODO
-    return .5;
+  //TODO
+  return .5;
 };
 
 string GraphAnalyzer::topKOpenTriangles(int k) {
-    //TODO
-    return "2,3,4";
+  //TODO
+  return "2,3,4";
 };
 
 
@@ -56,28 +56,20 @@ vector<int> GraphAnalyzer::topKNeighbors(int nodeID, int k,  vector<float> w) {
     sum = 0;
   }
   sort(dots.begin(), dots.end(), sortBackwards);
-  for(int i = 0; i < dots.size(); i++){
+  for(int i = 0; i < k; i++){
     result[i] = dots[i].second;
   }
-  while(result.size()!=k)
-  {
-      result.push_back(0);
-  }
-
   return result;
 };
 
 
 int GraphAnalyzer::topNonNeighbor(int nodeID, vector<float> w) {
-    //TODO
-    return 1;
+  //TODO
+  return 1;
 };
 
 
 float GraphAnalyzer::jacardIndexOfTopKNeighborhoods(int nodeAID, int nodeBiID, int k, vector<float> w) {
-    //TODO
-    return 0;
+  //TODO
+  return 0;
 };
-
-
-
