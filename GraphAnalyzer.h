@@ -1,25 +1,20 @@
 #ifndef ANALYZER_H
 #define ANALYZER_H
-
 #include "FeatureGraph.h"
-
 
 using namespace std;
 
-
-
 class GraphAnalyzer {
-
 
 public:	
 		
-	FeatureGraph G;
-	//TODO: Store a heap of triangeles using cpp prioirty_queue
-
-    //constructor
-	// 
-	// G: FeatureGraph to build on
-    GraphAnalyzer(FeatureGraph& G): G(G) {};
+  FeatureGraph G;
+  //TODO: Store a heap of triangeles using cpp prioirty_queue
+  
+  //constructor
+  // 
+  // G: FeatureGraph to build on
+  GraphAnalyzer(FeatureGraph& G): G(G) {};
 
 
     // Insert given node and corresponding features into graph

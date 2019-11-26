@@ -5,11 +5,8 @@
 #include <map>
 #include <iterator>
 #include <iostream>
-#include <iterator>
-
 
 using namespace std;
-
 
 FeatureGraph::FeatureGraph(int N, int d, vector<Node> nodes, vector<Edge> edges) {
   this->edges = edges;
@@ -24,18 +21,22 @@ FeatureGraph::FeatureGraph(int N, int d, vector<Node> nodes, vector<Edge> edges)
   for(itr = this->nodes.begin(); itr != this->nodes.end(); itr++){
     neighbors.insert(pair<int, vector<int>>(itr->first, empty));
   }
-  for(unsigned int i = 0; i < edges.size(); i++){
+  for(int i = 0; i < numedges; i++){
     neighbors[(edges[i]).IdA].push_back((edges[i]).IdB);
     neighbors[(edges[i]).IdB].push_back((edges[i]).IdA);
   }
 };
 
 void FeatureGraph::insert(Node node){
-  //TODO
+  nodes.insert(pair<int, Node>(node.id, Node(node.id, node.features)));
+  numnodes++;
 };
     
 void FeatureGraph::insert(Edge edge){
-  //TODO
+  edges.push_back(edge);
+  numedges++;
+  neighbors[edge.IdA].push_back(edge.IdB);
+  neighbors[edge.IdB].push_back(edge.IdA);
 };
 
 void FeatureGraph::print(){
