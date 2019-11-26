@@ -40,8 +40,8 @@ public:
     // Note: Must be transitive
     //      This means if t1<t2 and t2<t3 than t1< t3
     bool operator < (Triangle const &other) {
-        //TODO
-        return true;
+      return (((this->edgeA).weight + (this->edgeB).weight + (this->edgeC).weight) < 
+	      ((other.edgeA).weight + (other.edgeB).weight + (other.edgeC).weight));
     }
 
   void print(){

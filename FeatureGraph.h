@@ -46,7 +46,7 @@ class FeatureGraph {
   vector<int> getNeighbors(int nodeID);
   vector<float> getFeatures(int nodeID);
   int diameter();
-  int eccentricity(int nodeID);
+  int maxDistance(int nodeID);
   int distance(int nodeIdA, int nodeIdB);
 
 };  
