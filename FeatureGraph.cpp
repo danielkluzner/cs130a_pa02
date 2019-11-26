@@ -5,6 +5,7 @@
 #include <map>
 #include <iterator>
 #include <iostream>
+#include <cmath>
 
 using namespace std;
 
@@ -68,4 +69,16 @@ vector<float> FeatureGraph::getFeatures(int nodeID){
   Node n = nodes.lower_bound(nodeID)->second;
   return n.features;
 };
+
+int FeatureGraph::diameter(){
+  return 0; // STUB
+}
+
+int FeatureGraph::maxDistance(int nodeID){
+  return 0; // STUB
+}
+
+int FeatureGraph::distance(int nodeIdA, int nodeIdB){
+  return 0; // STUB
+}
 

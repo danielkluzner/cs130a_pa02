@@ -28,6 +28,7 @@ int main() {
     graph.print();
     cout << endl;
     graph.insert(Edge(4, 6, 7));
+    graph.insert(Edge(5, 6, 8));
     graph.print();
     cout << endl;
     

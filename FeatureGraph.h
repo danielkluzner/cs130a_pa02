@@ -42,11 +42,12 @@ class FeatureGraph {
     // May assume nodes in edge are already present
     void insert(Edge edge);
 
-    void print();
-
-    vector<int> getNeighbors(int nodeID);
-
-    vector<float> getFeatures(int nodeID);
+  void print();
+  vector<int> getNeighbors(int nodeID);
+  vector<float> getFeatures(int nodeID);
+  int diameter();
+  int eccentricity(int nodeID);
+  int distance(int nodeIdA, int nodeIdB);
 
 };  
 
