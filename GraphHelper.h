@@ -23,11 +23,15 @@ struct Edge {
 
 class Triangle {
     // TODO make a Triangle class with appropriate fields and methods
-
+private:
+  Node nodeA, nodeB, nodeC;
+  Edge edgeA, edgeB, edgeC;
+  
 public:
 
     // TODO make appropriate constuctor
-    Triangle() { }
+  Triangle(Node nodeA, Node nodeB, Node nodeC, Edge edgeA, Edge edgeB, Edge edgeC):
+    nodeA(nodeA), nodeB(nodeB), nodeC(nodeC), edgeA(edgeA), edgeB(edgeB), edgeC(edgeC) { }
     
     // Operator overloading for storage in priority queue
     // returns true iff t2 is greater than t1. 
