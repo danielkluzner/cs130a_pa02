@@ -9,7 +9,7 @@ int main() {
     
     vector<Node> nodes  {
        Node(1, vector<float> { 10, 10}),
-       Node(2,vector<float> { 20, 20}),
+       Node(2, vector<float> { 20, 20}),
        Node(3, vector<float> { 30, 30}),
        Node(4, vector<float> { 40, 40}) };
     
@@ -20,7 +20,17 @@ int main() {
  
 
     FeatureGraph graph = FeatureGraph(4, d, nodes, edges);
- 
+    graph.print();
+    cout << endl;
+
+    graph.insert(Node(6, vector<float>{60,60}));
+    graph.insert(Node(5, vector<float>{50,50}));
+    graph.print();
+    cout << endl;
+    graph.insert(Edge(4, 6, 7));
+    graph.print();
+    cout << endl;
+    
     //GraphAnalyzer analyzer = GraphAnalyzer(graph);
 
 

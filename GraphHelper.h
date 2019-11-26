@@ -41,8 +41,16 @@ public:
     bool operator < (Triangle const &other) {
         //TODO
         return true;
-    }  
+    }
 
+  void print(){
+    cout << "Edges\n-------\n";
+    cout << "(" << edgeA.IdA << ", " << edgeA.IdB << ") ";
+    cout << "(" << edgeB.IdA << ", " << edgeB.IdB << ") ";
+    cout << "(" << edgeC.IdA << ", " << edgeC.IdB << ")\n";
+    cout << endl;
+  }
+  
 };
 
 

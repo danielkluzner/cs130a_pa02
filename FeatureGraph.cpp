@@ -30,6 +30,8 @@ FeatureGraph::FeatureGraph(int N, int d, vector<Node> nodes, vector<Edge> edges)
 void FeatureGraph::insert(Node node){
   nodes.insert(pair<int, Node>(node.id, Node(node.id, node.features)));
   numnodes++;
+  vector<int> empty(0);
+  neighbors[node.id] = empty;
 };
     
 void FeatureGraph::insert(Edge edge){
