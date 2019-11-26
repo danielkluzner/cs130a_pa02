@@ -24,7 +24,7 @@ FeatureGraph::FeatureGraph(int N, int d, vector<Node> nodes, vector<Edge> edges)
   for(itr = this->nodes.begin(); itr != this->nodes.end(); itr++){
     neighbors.insert(pair<int, vector<int>>(itr->first, empty));
   }
-  for(int i = 0; i < edges.size(); i++){
+  for(unsigned int i = 0; i < edges.size(); i++){
     neighbors[(edges[i]).IdA].push_back((edges[i]).IdB);
     neighbors[(edges[i]).IdB].push_back((edges[i]).IdA);
   }
@@ -40,7 +40,7 @@ void FeatureGraph::insert(Edge edge){
 
 void FeatureGraph::print(){
   cout << "Edges\n-------\n";
-  for(int i = 0; i < edges.size(); i++){
+  for(unsigned int i = 0; i < edges.size(); i++){
     cout << "(" << (edges[i]).IdA << ", " << (edges[i]).IdB << ") ";
   }
   cout << endl << endl;
@@ -49,7 +49,7 @@ void FeatureGraph::print(){
   cout << "nodeID\t\tneighbors\n";
   for(itr = neighbors.begin(); itr != neighbors.end(); itr++){
     cout << itr->first << "\t\t";
-    for(int i = 0; i < (itr->second).size(); i++){
+    for(unsigned int i = 0; i < (itr->second).size(); i++){
       cout << (itr->second)[i] << " ";
     }
     cout << endl;

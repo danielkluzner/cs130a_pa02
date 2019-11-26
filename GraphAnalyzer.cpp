@@ -46,10 +46,10 @@ vector<int> GraphAnalyzer::topKNeighbors(int nodeID, int k,  vector<float> w) {
   vector<int> neighborIDs = G.getNeighbors(nodeID);
   vector<float> feats;
   float sum(0);
-  for(int i = 0; i < neighborIDs.size(); i++){
+  for(unsigned int i = 0; i < neighborIDs.size(); i++){
     feats.resize(0);
     feats = G.getFeatures(neighborIDs[i]);
-    for(int j = 0; j < w.size(); j++){
+    for(unsigned int j = 0; j < w.size(); j++){
       sum += (feats[j] * w[j]);
     }
     dots.push_back(pair<float,int>(sum,neighborIDs[i]));
