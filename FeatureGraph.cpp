@@ -12,7 +12,7 @@ using namespace std;
 FeatureGraph::FeatureGraph(int N, int d, vector<Node> nodes, vector<Edge> edges) {
   this->edges = edges;
   for(int i = 0; i < N; i++){
-    (this->nodes).insert(pair<int, Node>((nodes[i]).id, Node(nodes[i].id, nodes[i].features)));
+    (this->nodes).insert(pair<int, Node>((nodes[i]).id, Node(nodes[i])));
   }
   skillsize = d;
   numnodes = N;
@@ -29,7 +29,7 @@ FeatureGraph::FeatureGraph(int N, int d, vector<Node> nodes, vector<Edge> edges)
 };
 
 void FeatureGraph::insert(Node node){
-  nodes.insert(pair<int, Node>(node.id, Node(node.id, node.features)));
+  nodes.insert(pair<int, Node>(node.id, Node(node)));
   numnodes++;
   vector<int> empty(0);
   neighbors[node.id] = empty;

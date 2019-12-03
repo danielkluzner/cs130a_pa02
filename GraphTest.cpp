@@ -31,6 +31,20 @@ int main() {
     graph.insert(Edge(5, 6, 8));
     graph.print();
     cout << endl;
+    Node n1 = Node(1, vector<float> { 10, 10});
+    Node n2 = Node(2, vector<float> { 20, 20});
+    Node n3 = Node(3, vector<float> { 30, 30});
+    Triangle t1 = Triangle(n1, n2, n3,
+			  Edge(1,2, 10),
+			  Edge(2, 3, 9),
+			  Edge(1, 3, 5)
+			  );
+    Triangle t2 = Triangle(n1, n2, n3,
+			  Edge(1,2, 20),
+			  Edge(2, 3, 8),
+			  Edge(1, 3, 17)
+			  );
+    cout << (t1 < t2) << endl;
     
     //GraphAnalyzer analyzer = GraphAnalyzer(graph);
 
