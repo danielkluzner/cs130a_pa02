@@ -6,6 +6,7 @@
 #include <iterator>
 #include <iostream>
 #include <cmath>
+#include <bits/stdc++.h>
 
 using namespace std;
 
@@ -25,6 +26,14 @@ FeatureGraph::FeatureGraph(int N, int d, vector<Node> nodes, vector<Edge> edges)
   for(int i = 0; i < numedges; i++){
     neighbors[(edges[i]).IdA].push_back((edges[i]).IdB);
     neighbors[(edges[i]).IdB].push_back((edges[i]).IdA);
+  }
+  map<int, vector<bool>>::iterator itr2;
+  
+  for(itr2 = neighbors.begin(); itr2!= neighbors.end(); itr2++)
+  {
+    vector<bool> temp(itr2->second.size(),false);
+    checked.insert(pair<int,vector<bool>>(itr->first,temp));
+    
   }
 };
 
@@ -79,6 +88,16 @@ int FeatureGraph::maxDistance(int nodeID){
 }
 
 int FeatureGraph::distance(int nodeIdA, int nodeIdB){
+  vector<int> neighborIDs = neighbors[nodeIdA];
+  int dist = INT_MAX;
+  for(unsigned int i = 0;i < neighborIDs.size();i++)
+    {
+      if(checked[nodeIdA][i])
+	{
+	  int temp = distance(neighborIDs[i],nodeIdB);
+	}
+
+    }
   return 0; // STUB
 }
 

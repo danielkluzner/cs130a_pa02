@@ -17,6 +17,7 @@ class FeatureGraph {
  private:
   map<int, Node> nodes;
   map<int, vector<int>> neighbors;
+  map<int, vector<bool>> checked;
   vector<Edge> edges;
   int skillsize;
   int numnodes;
