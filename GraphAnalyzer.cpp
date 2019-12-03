@@ -3,7 +3,6 @@
 #include "GraphAnalyzer.h"
 #include <algorithm>
 #include <utility>
-#include <algorithm>
 
 using namespace std;
 
@@ -64,8 +63,7 @@ vector<int> GraphAnalyzer::topKNeighbors(int nodeID, int k,  vector<float> w) {
 
 
 int GraphAnalyzer::topNonNeighbor(int nodeID, vector<float> w) {
-  //TODO
-  return 1;
+  return G.topNonNeighbor(nodeID, w);
 };
 
 

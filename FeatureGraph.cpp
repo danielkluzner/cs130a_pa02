@@ -7,8 +7,16 @@
 #include <iostream>
 #include <cmath>
 #include <bits/stdc++.h>
+#include <algorithm>
+#include <utility>
 
 using namespace std;
+
+bool sortBackwards2(const pair<float,int> &one,  
+		   const pair<float,int> &two) 
+{ 
+  return (one.first > two.first); 
+}
 
 FeatureGraph::FeatureGraph(int N, int d, vector<Node> nodes, vector<Edge> edges) {
   this->edges = edges;
@@ -27,14 +35,14 @@ FeatureGraph::FeatureGraph(int N, int d, vector<Node> nodes, vector<Edge> edges)
     neighbors[(edges[i]).IdA].push_back((edges[i]).IdB);
     neighbors[(edges[i]).IdB].push_back((edges[i]).IdA);
   }
-  map<int, vector<bool>>::iterator itr2;
+  /*map<int, vector<bool>>::iterator itr2;
   
-  for(itr2 = neighbors.begin(); itr2!= neighbors.end(); itr2++)
+  for(itr2 = neighbors.begin(); itr2 != neighbors.end(); itr2++)
   {
     vector<bool> temp(itr2->second.size(),false);
     checked.insert(pair<int,vector<bool>>(itr->first,temp));
     
-  }
+    }*/
 };
 
 void FeatureGraph::insert(Node node){
@@ -88,7 +96,7 @@ int FeatureGraph::maxDistance(int nodeID){
 }
 
 int FeatureGraph::distance(int nodeIdA, int nodeIdB){
-  vector<int> neighborIDs = neighbors[nodeIdA];
+  /*vector<int> neighborIDs = neighbors[nodeIdA];
   int dist = INT_MAX;
   for(unsigned int i = 0;i < neighborIDs.size();i++)
     {
@@ -97,7 +105,33 @@ int FeatureGraph::distance(int nodeIdA, int nodeIdB){
 	  int temp = distance(neighborIDs[i],nodeIdB);
 	}
 
-    }
+	}*/
   return 0; // STUB
+}
+
+int FeatureGraph::topNonNeighbor(int nodeID, vector<float> w){
+  if(nodes.size() == 0) return 0;
+  vector<pair<float,int>> dots;
+  vector<int> neighborIDs = getNeighbors(nodeID);
+  vector<float> feats;
+  float sum(0);
+  map<int, Node>::iterator itr;
+  for(itr = nodes.begin(); itr != nodes.end(); itr++){
+    std::vector<int>::iterator it = std::find(neighborIDs.begin(), neighborIDs.end(), itr->first);
+    if(it == neighborIDs.end() && itr->first != nodeID){
+      feats.resize(0);
+      feats = (itr->second).features;
+      for(unsigned int j = 0; j < w.size(); j++){
+	sum += (feats[j] * w[j]);
+      }
+      dots.push_back(pair<float,int>(sum, itr->first));
+      sum = 0;
+    }
+  }
+  sort(dots.begin(), dots.end(), sortBackwards2);
+  if(dots.size() == 0){
+    return nodeID;
+  }
+  return dots[0].second;
 }
 
