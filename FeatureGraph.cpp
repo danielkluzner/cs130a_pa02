@@ -129,7 +129,7 @@ int FeatureGraph::topNonNeighbor(int nodeID, vector<float> w){
     }
   }
   
-  if(dots.size() == 0) return nodeID;
+  if(dots.size() == 0) return -1;
   sort(dots.begin(), dots.end(), sortBackwards2);
   return dots[0].second;
 }
