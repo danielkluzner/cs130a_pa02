@@ -49,7 +49,7 @@ void FeatureGraph::insert(Node node){
   nodes.insert(pair<int, Node>(node.id, Node(node)));
   numnodes++;
   vector<int> empty(0);
-  neighbors[node.id] = empty;
+  neighbors.insert(pair<int, vector<int>>(node.id, empty));
 };
     
 void FeatureGraph::insert(Edge edge){
@@ -110,11 +110,11 @@ int FeatureGraph::distance(int nodeIdA, int nodeIdB){
 }
 
 int FeatureGraph::topNonNeighbor(int nodeID, vector<float> w){
-  if(nodes.size() == 0) return 0;
-  vector<pair<float,int>> dots;
+  vector<pair<float,int>> dots(0);
   vector<int> neighborIDs = getNeighbors(nodeID);
   vector<float> feats;
   float sum(0);
+  
   map<int, Node>::iterator itr;
   for(itr = nodes.begin(); itr != nodes.end(); itr++){
     std::vector<int>::iterator it = std::find(neighborIDs.begin(), neighborIDs.end(), itr->first);
@@ -128,10 +128,8 @@ int FeatureGraph::topNonNeighbor(int nodeID, vector<float> w){
       sum = 0;
     }
   }
+  
+  if(dots.size() == 0) return nodeID;
   sort(dots.begin(), dots.end(), sortBackwards2);
-  if(dots.size() == 0){
-    return nodeID;
-  }
   return dots[0].second;
 }
-

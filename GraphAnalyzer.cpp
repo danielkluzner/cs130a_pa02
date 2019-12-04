@@ -3,6 +3,9 @@
 #include "GraphAnalyzer.h"
 #include <algorithm>
 #include <utility>
+#include <iterator>
+#include <cmath>
+#include <bits/stdc++.h>
 
 using namespace std;
 
@@ -40,11 +43,12 @@ string GraphAnalyzer::topKOpenTriangles(int k) {
 
 
 vector<int> GraphAnalyzer::topKNeighbors(int nodeID, int k,  vector<float> w) {
-  vector<pair<float,int>> dots;
-  vector<int> result(k,0);
+  vector<pair<float,int>> dots(0);
+  vector<int> result(0);
   vector<int> neighborIDs = G.getNeighbors(nodeID);
   vector<float> feats;
   float sum(0);
+  
   for(unsigned int i = 0; i < neighborIDs.size(); i++){
     feats.resize(0);
     feats = G.getFeatures(neighborIDs[i]);
@@ -55,8 +59,13 @@ vector<int> GraphAnalyzer::topKNeighbors(int nodeID, int k,  vector<float> w) {
     sum = 0;
   }
   sort(dots.begin(), dots.end(), sortBackwards);
-  for(int i = 0; i < k; i++){
-    result[i] = dots[i].second;
+  
+  int loop;
+  if(dots.size() > k) loop = k;
+  else loop = dots.size();
+  
+  for(int i = 0; i < loop; i++){
+    result.push_back(dots[i].second);
   }
   return result;
 };
@@ -67,7 +76,25 @@ int GraphAnalyzer::topNonNeighbor(int nodeID, vector<float> w) {
 };
 
 
-float GraphAnalyzer::jacardIndexOfTopKNeighborhoods(int nodeAID, int nodeBiID, int k, vector<float> w) {
-  //TODO
-  return 0;
+float GraphAnalyzer::jacardIndexOfTopKNeighborhoods(int nodeAID, int nodeBID, int k, vector<float> w) {
+  vector<int> nodeA = topKNeighbors(nodeAID, k, w);
+  vector<int> nodeB = topKNeighbors(nodeBID, k, w);
+  int shared(0);
+  unordered_set <int> total;
+  for(unsigned int i = 0; i < nodeA.size(); i++) total.insert(nodeA[i]);
+  for(unsigned int i = 0; i < nodeB.size(); i++) total.insert(nodeB[i]);
+  if(total.size() == 0) return 0;
+  if(nodeA.size() > nodeB.size()){
+    for(unsigned int i = 0; i < nodeA.size(); i++){
+      std::vector<int>::iterator it = std::find(nodeB.begin(), nodeB.end(), nodeA[i]);
+      if(it != nodeB.end()) shared++;
+    }
+  }
+  else{
+    for(unsigned int i = 0; i < nodeB.size(); i++){
+      std::vector<int>::iterator it = std::find(nodeA.begin(), nodeA.end(), nodeB[i]);
+      if(it != nodeA.end()) shared++;
+    }
+  }
+  return (shared * 1.0) / total.size();
 };

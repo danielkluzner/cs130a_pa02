@@ -46,8 +46,10 @@ class FeatureGraph {
   void print();
   vector<int> getNeighbors(int nodeID);
   vector<float> getFeatures(int nodeID);
+
   int diameter();
   int topNonNeighbor(int nodeID, vector<float> w);
+
   int maxDistance(int nodeID);
   int distance(int nodeIdA, int nodeIdB);
 
