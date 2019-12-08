@@ -1,10 +1,17 @@
 #ifndef ANALYZER_H
 #define ANALYZER_H
 #include "FeatureGraph.h"
+#include <vector>
+#include <queue>
 
 using namespace std;
 
 class GraphAnalyzer {
+    
+private:
+  // implemented through the make_heap() method
+  // of the <algorithm> library
+  priority_queue<Triangle> openTrianglesMaxHeap;
 
 public:	
 		
@@ -14,7 +21,7 @@ public:
   //constructor
   // 
   // G: FeatureGraph to build on
-  GraphAnalyzer(FeatureGraph& G): G(G) {};
+  GraphAnalyzer(FeatureGraph& G);
 
 
     // Insert given node and corresponding features into graph

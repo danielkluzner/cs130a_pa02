@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <iostream>
+#include <string>
 using namespace std;
 
 struct Node {
@@ -24,15 +25,20 @@ struct Edge {
 
 class Triangle {
     // TODO make a Triangle class with appropriate fields and methods
+    
 private:
+  string tID;
   Node nodeA, nodeB, nodeC;
-  Edge edgeA, edgeB, edgeC;
   
 public:
-
+    
+    // needed to be public in order for heap helper
+    // method to access them
+    Edge edgeA, edgeB, edgeC;
+    
     // TODO make appropriate constuctor
-  Triangle(Node nodeA, Node nodeB, Node nodeC, Edge edgeA, Edge edgeB, Edge edgeC):
-    nodeA(nodeA), nodeB(nodeB), nodeC(nodeC), edgeA(edgeA), edgeB(edgeB), edgeC(edgeC) { }
+    Triangle(string tID, Node nodeA, Node nodeB, Node nodeC, Edge edgeA, Edge edgeB, Edge edgeC):
+    tID(tID), nodeA(nodeA), nodeB(nodeB), nodeC(nodeC), edgeA(edgeA), edgeB(edgeB), edgeC(edgeC) { }
     
     // Operator overloading for storage in priority queue
     // returns true iff t2 is greater than t1. 
@@ -43,15 +49,10 @@ public:
       return (((this->edgeA).weight + (this->edgeB).weight + (this->edgeC).weight) < 
 	      ((other.edgeA).weight + (other.edgeB).weight + (other.edgeC).weight));
     }
-
-  void print(){
-    cout << "Edges\n-------\n";
-    cout << "(" << edgeA.IdA << ", " << edgeA.IdB << ") ";
-    cout << "(" << edgeB.IdA << ", " << edgeB.IdB << ") ";
-    cout << "(" << edgeC.IdA << ", " << edgeC.IdB << ")\n";
-    cout << endl;
-  }
-  
+    
+    const string getID() { return tID; }
+    
+    
 };
 
 

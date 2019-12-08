@@ -5,40 +5,82 @@
 #include <utility>
 #include <iterator>
 #include <cmath>
-#include <bits/stdc++.h>
+#include <unordered_set>
+#include <queue>
+#include <vector>
 
 using namespace std;
 
-bool sortBackwards(const pair<float,int> &one,  
-		   const pair<float,int> &two) 
-{ 
-  return (one.first > two.first); 
-} 
+// helper sort method
+bool sortBackwards(const pair<float,int> &one,
+           const pair<float,int> &two)
+{
+  return (one.first > two.first);
+}
+
+// helper heapify method
+bool operator < (const Triangle &one, const Triangle &other) {
+  return (((one.edgeA).weight + (one.edgeB).weight + (one.edgeC).weight) <
+      ((other.edgeA).weight + (other.edgeB).weight + (other.edgeC).weight));
+}
+
+GraphAnalyzer::GraphAnalyzer(FeatureGraph& G) {
+    this->G = G;
+    G.initializeTriangles();
+    openTrianglesMaxHeap = priority_queue<Triangle>();
+    vector<Triangle> temp = G.getOpenTriangles();
+    for(Triangle x : temp) openTrianglesMaxHeap.push(x);
+}
 
 void GraphAnalyzer::insert(Node n) {
   G.insert(n);
   // TODO Adjust calculations for ratio of open triangles and topKtriangles
+    
+  // RELOADS all the triangles appropriately
+  G.initializeTriangles();
+  openTrianglesMaxHeap = priority_queue<Triangle>();
+  vector<Triangle> temp = G.getOpenTriangles();
+  for(Triangle x : temp) openTrianglesMaxHeap.push(x);
 };
 
 void GraphAnalyzer::insert(Edge e) {
   G.insert(e);
   // TODO Adjust calculations for ratio of open triangles and topKtriangles
+    
+  // RELOADS all the triangles appropriately
+  G.initializeTriangles();
+  openTrianglesMaxHeap = priority_queue<Triangle>();
+  vector<Triangle> temp = G.getOpenTriangles();
+  for(Triangle x : temp) openTrianglesMaxHeap.push(x);
 };
 
 int GraphAnalyzer::diameter() {
-  //TODO
-  return 2;
+    return G.diameter();
 };
 
 
 float GraphAnalyzer::openClosedTriangleRatio() {
-  //TODO
-  return .5;
+    int open = G.numOpenTriangles();
+    int closed = G.numClosedTriangles();
+    if(closed == 0) return -1;
+    return (open * 1.0) / closed;
 };
 
 string GraphAnalyzer::topKOpenTriangles(int k) {
-  //TODO
-  return "2,3,4";
+    vector<Triangle> temp;
+    string result = "";
+    int loop;
+    if(openTrianglesMaxHeap.size() > k) loop = k;
+    else loop = openTrianglesMaxHeap.size();
+    for(int i = 0; i < loop; i++){
+        Triangle t = openTrianglesMaxHeap.top();
+        temp.push_back(t);
+        result += t.getID();
+        if(i != loop - 1) result += ";";
+        openTrianglesMaxHeap.pop();
+    }
+    for(Triangle x : temp) openTrianglesMaxHeap.push(x);
+    return result;
 };
 
 
